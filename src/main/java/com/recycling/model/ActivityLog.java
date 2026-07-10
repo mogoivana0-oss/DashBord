@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * Entité Journal d'Activité pour l'audit du système
+ * Entité Historique d'Activité pour l'audit
  */
 @Entity
 @Table(name = "activity_logs")
@@ -30,7 +30,7 @@ public class ActivityLog {
     private String username;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "action_type")
     private ActionType actionType;
 
     @Column(name = "entity_type")
@@ -57,29 +57,7 @@ public class ActivityLog {
     }
 
     public enum ActionType {
-        LOGIN("Connexion"),
-        LOGOUT("Déconnexion"),
-        CREATE("Création"),
-        UPDATE("Modification"),
-        DELETE("Suppression"),
-        VIEW("Consultation"),
-        DOWNLOAD("Téléchargement"),
-        UPLOAD("Téléversement"),
-        PASSWORD_CHANGE("Changement de mot de passe"),
-        PERMISSION_CHANGE("Changement de permissions"),
-        BACKUP("Sauvegarde"),
-        RESTORE("Restauration"),
-        SYSTEM_CONFIG("Configuration système"),
-        OTHER("Autre");
-
-        private final String displayName;
-
-        ActionType(String displayName) {
-            this.displayName = displayName;
-        }
-
-        public String getDisplayName() {
-            return displayName;
-        }
+        LOGIN, LOGOUT, CREATE, UPDATE, DELETE, VIEW, DOWNLOAD, UPLOAD,
+        PASSWORD_CHANGE, PERMISSION_CHANGE, BACKUP, RESTORE, SYSTEM_CONFIG, OTHER
     }
 }
